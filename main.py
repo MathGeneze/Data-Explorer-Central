@@ -101,10 +101,6 @@ if upload is not None:
                                title=f'Histograma de {escolha_coluna_num}')
             st.plotly_chart(fig)
 
-            # Boxplot da coluna numérica
-            fig_box = px.box(tabela, y=escolha_coluna_num,
-                             title=f'Boxplot de {escolha_coluna_num}')
-            st.plotly_chart(fig_box)
 
             # --- Métricas estatísticas ---
             st.divider()
