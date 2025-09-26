@@ -9,7 +9,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWUwOWp1dHc0YnRsNm90ZGtncWdieG56emJ6cXRreWQ2M2g3NWw1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/p6EDJOPtyd0DJSuDef/giphy.gif');
+        background-image: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWZvcDV4azRiYjk2NmxhZG50OGZwcDc4YzJrcjR4MWc0OTJrdDkyciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dAWZiSMbMvObDWP3aA/giphy.gif');
         background-size: cover;
         background-repeat: no-repeat;
     }
@@ -19,7 +19,7 @@ st.markdown(
 )
 
 # --- Cabeçalho da página ---
-st.title('📚 Data Explorer Centrallll')
+st.title('📚 Data Explorer Central')
 st.subheader('Carregue seus dados. Explore estatísticas. Gere gráficos')
 st.markdown('*Insira um **arquivo CSV** e explore as mais diversas estatísticas com **análise de gráficos**, **tabelas** e **métricas**.*')
 
