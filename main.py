@@ -19,7 +19,7 @@ st.markdown(
 )
 
 # --- Cabeçalho da página ---
-st.title('📚 Data Explorer Central')
+st.title('📚 Data Explorer Centrallll')
 st.subheader('Carregue seus dados. Explore estatísticas. Gere gráficos')
 st.markdown('*Insira um **arquivo CSV** e explore as mais diversas estatísticas com **análise de gráficos**, **tabelas** e **métricas**.*')
 
