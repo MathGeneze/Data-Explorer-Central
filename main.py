@@ -27,12 +27,11 @@ st.markdown('*Insira um **arquivo CSV** e explore as mais diversas estatísticas
 # --- Upload de arquivo CSV ---
 upload = st.file_uploader(
     label='Escolha um arquivo CSV:',
-    type='CSV'
+    type='csv'
 )
 
 # --- Função para ler o CSV com cache ---
-# O decorator @st.cache_data faz com que a função só execute novamente se o arquivo mudar,
-# otimizando a performance da aplicação.
+# O decorator @st.cache_data faz com que a função só execute novamente se o arquivo mudar,otimizando a performance da aplicação.
 @st.cache_data
 def carregar_csv(uploaded_file):
     """Lê o arquivo CSV enviado pelo usuário e retorna um DataFrame pandas."""
@@ -237,6 +236,7 @@ if upload is not None and len(colunas_numericas) > 1:
                 
                 # Gráfico de pizza
                 elif tipo == 'Pizza':
+                
                     fig = px.pie(
                         df, names=primeira_coluna, title=f"Gráfico de Pizza: Coluna - {primeira_coluna}.")
 
