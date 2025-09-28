@@ -2,7 +2,7 @@
 
 <!--------------- 📍 Introdução -------------->
 ## 📍 Introdução
-> **Projeto autoral** de uma aplicação web desenvolvido em **Python** para **explorar, visualizar e analisar arquivos CSV** de forma simples e interativa. Com este app, é possível **carregar dados**, **gerar estatísticas descritivas** e criar diferentes tipos de **gráficos personalizáveis** sem escrever código. Link para acessar o site fixado na descrição do repositório.
+> **Projeto autoral** de uma aplicação web desenvolvido em **Python** para **explorar, visualizar e analisar arquivos CSV** de forma simples e interativa. Com este app, é possível **carregar dados**, **gerar estatísticas descritivas** e criar diferentes tipos de **gráficos personalizáveis** sem escrever código. **Link para acessar o site fixado na descrição do repositório!**
 
 <br>
 
