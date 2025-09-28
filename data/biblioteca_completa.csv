@@ -1,0 +1,11 @@
+id,nome,email,quantidade_emprestimos,livro_emprestado,genero,ano_publicacao
+1,Ana Silva,ana.silva@email.com,5,Dom Casmurro,Modernismo,1882
+2,Bruno Souza,bruno.souza@email.com,12,Grande Sertão: Veredas,Romance,1882
+3,Carla Mendes,carla.mendes@email.com,7,Memórias Póstumas de Brás Cubas,Romance,1881
+4,Diego Rocha,diego.rocha@email.com,3,Memórias Póstumas de Brás Cubas,Romance,1938
+5,Elisa Costa,elisa.costa@email.com,15,Macunaíma,Romance,1956
+6,Fábio Lima,fabio.lima@email.com,9,Iracema,Romance,1977
+7,Gabriela Alves,gabriela.alves@email.com,11,Macunaíma,Ficção,1938
+8,Henrique Santos,henrique.santos@email.com,4,O Alienista,Realismo,1882
+9,Isabela Martins,isabela.martins@email.com,6,Vidas Secas,Conto,1882
+10,João Pereira,joao.pereira@email.com,10,Capitães da Areia,Ficção,1881
