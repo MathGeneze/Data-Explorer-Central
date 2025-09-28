@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 
 
-
 # --- CSS para adicionar GIF de fundo ---
 # O bloco abaixo insere um GIF animado como fundo da aplicação usando CSS.
 # Pode ser removido ou alterado conforme a identidade visual desejada.
@@ -34,8 +33,6 @@ upload = st.file_uploader(
 # --- Função para ler o CSV com cache ---
 # O decorator @st.cache_data faz com que a função só execute novamente se o arquivo mudar,
 # otimizando a performance da aplicação.
-
-
 @st.cache_data
 def carregar_csv(uploaded_file):
     """Lê o arquivo CSV enviado pelo usuário e retorna um DataFrame pandas."""
@@ -53,7 +50,6 @@ if upload is not None:
 
 
 
-
 # ------ Exibição das primeiras linhas da tabela ------
 if upload is not None:
     st.divider()
@@ -68,7 +64,6 @@ if upload is not None:
                            min_value=5, max_value=min(50, len(tabela)), value=5, step=1)
     st.dataframe(tabela.head(num_linhas))
     st.divider()
-
 
 
 
@@ -98,19 +93,15 @@ if upload is not None:
                 
                 # --- Usuário seleciona a posição do gráfico
                 posicao = ['Vertical', 'Horizontal']
-                
                 c1, c2 = st.columns(2)
-                
                 opcoes = c1.pills('Escolha a posição do gráfico:', options=posicao)
                 
                 # --- Usuário pode selecionar a cor do gráfio
                 escolha_cor = c2.color_picker("Escolha a cor do gráfico:", '#1585C1')
                 
                 if opcoes == 'Vertical':
-                    
                     # Exibe gráfico 
                     st.bar_chart(tabela[coluna_unica].value_counts(), horizontal=False, color=escolha_cor)
-
                 else:
                     st.bar_chart(tabela[coluna_unica].value_counts(), horizontal=True, color=escolha_cor)
 
@@ -122,9 +113,7 @@ if upload is not None:
 
             # --- Usuário seleciona a posição do gráfico
             posicao = ['Vertical', 'Horizontal']
-            
             c1, c2 = st.columns(2)
-                
             opcoes = c1.pills('Escolha a posição do gráfico:', options=posicao)
             
             # --- Usuário pode selecionar a cor do gráfio
@@ -133,7 +122,6 @@ if upload is not None:
             if opcoes == 'Vertical':    
                  # Exibe gráfico 
                 st.bar_chart(tabela[escolha_coluna_num].value_counts(), horizontal=False, color=escolha_cor)
-
             else:
                 st.bar_chart(tabela[escolha_coluna_num].value_counts(), horizontal=True, color=escolha_cor)
 
@@ -163,21 +151,17 @@ if upload is not None:
         # Exibe as métricas em colunas para melhor visualização
         # -- Coluna supeior
         sup_col1, sup_col2, sup_col3, sup_col4 = st.columns(4)
-        sup_col1.metric(label='Valor Máximo',
-                        value=f'{maximo}', border=True)
-        sup_col2.metric(label='Valor Mínimo',
-                        value=f'{minimo}', border=True)
+        sup_col1.metric(label='Valor Máximo',value=f'{maximo}', border=True)
+        sup_col2.metric(label='Valor Mínimo',value=f'{minimo}', border=True)
         sup_col3.metric(label='Soma', value=f'{soma}', border=True)
-        sup_col4.metric(label='Média', value=f'{media}', border=True)
+        sup_col4.metric(label='Média', value=f'{media:.2f}', border=True)
 
         # -- Coluna Inferior
         inf_col1, inf_col2, inf_col3, inf_col4 = st.columns(4)
-        inf_col1.metric(label='Contagem de Valores',
-                        value=f'{contagem}', border=True)
+        inf_col1.metric(label='Contagem de Valores',value=f'{contagem}', border=True)
         inf_col2.metric(label='Moda', value=f'{moda}', border=True)
-        inf_col3.metric(label='Mediana', value=f'{mediana}', border=True)
-        inf_col4.metric(label='Desvio Padrão',
-                        value=f'{desvio_padrao:.2f}', border=True)
+        inf_col3.metric(label='Mediana', value=f'{mediana:.2f}', border=True)
+        inf_col4.metric(label='Desvio Padrão',value=f'{desvio_padrao:.2f}', border=True)
 
     else:
         st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.',
@@ -191,10 +175,11 @@ if upload is not None and len(colunas_numericas) > 1:
     st.subheader('📊 Visualização de Múltiplas Colunas')
     st.markdown(
         '*Selecione **duas colunas numéricas** e o **tipo de gráfico** para fazer análises comparativas.*')
-
-
+    
+    # Criando colunas
     col1, col2 = st.columns(2)
     
+    # Escolha da primeira coluna
     primeira_coluna = col1.selectbox(
         label='Escolha a primeira coluna:', options=colunas_numericas)
 
@@ -229,12 +214,11 @@ if upload is not None and len(colunas_numericas) > 1:
                         angulo = 'v'
                     elif posicao2 == 'Horizontal':
                         angulo = 'h'
-                    
                     # Criação do gráfico de barra
                     fig = px.bar(df, x=coluna_x, y=coluna_y,
                                 title=f'Gráfico de Barra: {coluna_x} X {coluna_y}', color=primeira_coluna,
                                 orientation=angulo)
-                
+                    
                 # -- Gráfico de linha   
                 elif tipo == 'Linha':
                     fig = px.line(df, x=coluna_x, y=coluna_y,
@@ -260,23 +244,26 @@ if upload is not None and len(colunas_numericas) > 1:
                     st.info(
                         'O gráfico de pizza não compara dados de 2 colunas! Altere as opções da 1ª coluna para visualizar os dados.', icon=':material/info:')
                     
-                
+                # Grafico de Dispersão
                 elif tipo == 'Dispersão':
                     fig = px.scatter(
                         df, x=coluna_x, y=coluna_y, title=f"Gráfico de Dispersão: {coluna_x} X {coluna_y}", color=primeira_coluna)
-                    
+                
+                # Gráfio de caixa
                 elif tipo == 'Caixa':
                     fig = px.box(df, x=coluna_x, y=coluna_y,
                                  title=f'Gráfico de Caixa: {coluna_x} X {coluna_y}')
-                    
+                
+                # Se não ouver escolha no gráfico, retornará None
                 else:
                     fig = None
                 return fig
 
+            # Se o usuário escolher um tipo de gráfico, chamamos a função para criá-lo
             if escolha_grafico:
                 fig = gerar_grafico(tabela, primeira_coluna,
                                     segunda_coluna, escolha_grafico, posicao2)
                 if fig:
                     st.plotly_chart(fig)
 
-# Criando Insights com o CHAT GPT
+
