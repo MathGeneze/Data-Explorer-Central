@@ -34,6 +34,7 @@
 <!--------------- 🚀 Funcionalidades -------------->
 ## <a id="funcionalidades">🚀 Funcionalidades</a>
 
+> - Opções de Temas da página: **Dark**, **Light** ou **Gradient**.
 > - **Upload de CSV**: carregue qualquer arquivo `.csv` e visualize as primeiras linhas.
 > - **Informações do dataset**: número de colunas e linhas exibido automaticamente.
 >
@@ -45,11 +46,13 @@
 > - **Métricas estatísticas** para colunas numéricas:
 >    - Máximo, Mínimo, Soma, Mediana, Desvio Padrão e mais.
 >  
-> - **Visualização de múltiplas colunas numéricas**:
->    - Compare duas colunas em gráficos de **Barras**, **Linha**, **Área**, **Pizza**, **Dispersão** ou **Caixa**.
+> - **Visualização de múltiplas colunas Numéricas e Categóricas**:
+>    - Compare duas colunas e gere gráficos para análises visuais.
+>    - Opções de gráficos Numéricos: **Barra**, **Linha**, **Área**, **Dispersão** ou **Caixa**.
+>    - Opções de Gráficos Categóricos: **Barra Agrupada** ou **Mapa de Calor**.
 >    - Controle de orientação (vertical/horizontal).
 >
-> - **Tema visual**: GIF animado como plano de fundo para uma experiência mais dinâmica.
+> 
 
 
 <br>
