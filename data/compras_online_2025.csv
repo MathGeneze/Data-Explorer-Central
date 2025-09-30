@@ -1,0 +1,51 @@
+﻿Id,Item_Comprado,Categoria,Loja,Custo_Item (R$),Data_Compra,Mes_Compra
+1,Colar,Acessórios,Shopee,1795.65,2025-06-28,June
+2,Panela,Casa,Amazon,790.42,2025-02-24,February
+3,Pulseira,Acessórios,Magazine Luiza,110.91,2025-05-31,May
+4,Smartwatch,Eletrônicos,Magazine Luiza,1275.02,2025-08-16,August
+5,Blusa,Roupas,Sephora,1103.47,2025-09-15,September
+6,Batom,Beleza,C&A,1431.03,2025-09-23,September
+7,Saia,Roupas,Americanas,1672.88,2025-04-26,April
+8,Jogo de pratos,Casa,O Boticário,1703.01,2025-03-08,March
+9,Jaqueta,Roupas,Sephora,113.39,2025-09-04,September
+10,Pulseira,Acessórios,Amazon,1757.32,2025-02-01,February
+11,Batom,Beleza,Magazine Luiza,1017.42,2025-02-25,February
+12,Calça Jeans,Roupas,Shopee,1828.83,2025-03-19,March
+13,Creme hidratante,Beleza,Magazine Luiza,918.57,2025-01-04,January
+14,Bolsa,Acessórios,Amazon,1409.42,2025-02-09,February
+15,Perfume,Beleza,Mercado Livre,1508.39,2025-01-11,January
+16,Blusa,Roupas,O Boticário,1571.96,2025-04-19,April
+17,Jogo de pratos,Casa,Sephora,1099.8,2025-04-22,April
+18,Jaqueta,Roupas,Sephora,930.75,2025-08-16,August
+19,Creme hidratante,Beleza,Americanas,1235.85,2025-02-13,February
+20,Batom,Beleza,Morana,600.89,2025-02-06,February
+21,Perfume,Beleza,O Boticário,921.55,2025-07-13,July
+22,Bolsa,Acessórios,Renner,1714.05,2025-01-10,January
+23,Jaqueta,Roupas,O Boticário,356.17,2025-09-14,September
+24,Pulseira,Acessórios,Renner,413.84,2025-01-15,January
+25,Toalha,Casa,O Boticário,138.56,2025-03-10,March
+26,Smartwatch,Eletrônicos,Amazon,931.01,2025-04-17,April
+27,Carregador,Eletrônicos,Mercado Livre,415.92,2025-01-31,January
+28,Blusa,Roupas,Magazine Luiza,1428.99,2025-03-10,March
+29,Batom,Beleza,C&A,470.81,2025-03-02,March
+30,Lençol,Casa,C&A,940.81,2025-02-12,February
+31,Colar,Acessórios,Sephora,838.69,2025-01-04,January
+32,Colar,Acessórios,Americanas,1002.43,2025-09-05,September
+33,Creme hidratante,Beleza,Magazine Luiza,340.55,2025-06-07,June
+34,Creme hidratante,Beleza,Renner,604.16,2025-07-03,July
+35,Celular,Eletrônicos,Mercado Livre,904.48,2025-01-23,January
+36,Carregador,Eletrônicos,Magazine Luiza,1033.97,2025-01-12,January
+37,Notebook,Eletrônicos,Magazine Luiza,639.24,2025-07-10,July
+38,Calça Jeans,Roupas,Mercado Livre,303.04,2025-03-10,March
+39,Toalha,Casa,Morana,1511.96,2025-02-17,February
+40,Base,Beleza,Renner,608.84,2025-07-08,July
+41,Base,Beleza,Shopee,551.9,2025-05-13,May
+42,Brinco,Acessórios,O Boticário,971.72,2025-06-07,June
+43,Almofada,Casa,Americanas,1562.9,2025-03-03,March
+44,Almofada,Casa,Magazine Luiza,524.32,2025-05-05,May
+45,Máscara de cílios,Beleza,O Boticário,1490.67,2025-06-10,June
+46,Base,Beleza,Mercado Livre,1411.07,2025-04-07,April
+47,Carregador,Eletrônicos,Sephora,1669.77,2025-05-09,May
+48,Panela,Casa,Americanas,1784.54,2025-08-25,August
+49,Batom,Beleza,C&A,278.5,2025-08-04,August
+50,Bolsa,Acessórios,O Boticário,673.3,2025-06-16,June

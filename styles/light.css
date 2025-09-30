@@ -1,0 +1,47 @@
+/* Tema Light */
+@keyframes st-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.stApp {
+  background-color: #fafafa;
+  color: #111111;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  animation: st-fade-in 0.5s ease both;
+}
+
+/* Força texto em quase todo lugar, exceto SVGs e imagens */
+.stApp *:not(svg):not(img):not(path):not(circle):not(rect) {
+  color: #111111 !important;
+  transition: color 0.35s ease-in-out;
+}
+
+/* Markdown */
+div[data-testid="stMarkdownContainer"] * {
+  color: #111111 !important;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #111111 !important;
+}
+
+/* Segmented Control */
+[data-baseweb="segmented-control"] * {
+  color: #111111 !important;
+  font-weight: 600;
+}
+[data-baseweb="segmented-control"] button {
+  background-color: transparent !important;
+  border-radius: 10px;
+  border: 1px solid transparent !important;
+}
+[data-baseweb="segmented-control"] button[aria-pressed="true"] {
+  background-color: #fff0eb !important;
+  border: 1px solid #ffd6c7 !important;
+  color: #111111 !important;
+}
+
+/* Links */
+div[data-testid="stMarkdownContainer"] a, a {
+  color: #0b66ff !important;
+}
