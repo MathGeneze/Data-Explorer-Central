@@ -194,17 +194,19 @@ if upload is not None:
 
         # Se o usuário não selecionar nenhuma opção, emite um alerta.
     else:
-        st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')  
-                  
-else:
-    st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.',icon=':material/warning:')  
-    
-    
-# ------ Métricas estatísticas ------ #        
-if upload is not None:  
+        st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')
+
+# Verifica se não há colunas categóricas nem numéricas e exibe uma mensagem informativa
+if upload is not None and len(colunas_categoricas) == 0 and len(colunas_numericas) == 0:
+    st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.', icon=':material/warning:')
+
+
+# ------ Métricas estatísticas ------ #
+if upload is not None:
     st.divider()
     st.subheader('🌐 Métricas Estatísticas ')
-    st.markdown(f'*Observe abaixo as métricas disponíveis de cada **coluna numérica.***')
+    st.markdown(
+        f'*Observe abaixo as métricas disponíveis de cada **coluna numérica.***')
 
     escolha_metrica = st.selectbox('Selecione uma coluna:', colunas_numericas)
 
@@ -230,17 +232,17 @@ if upload is not None:
 
     # -- Coluna Inferior
     inf_col1, inf_col2, inf_col3, inf_col4 = st.columns(4)
-    inf_col1.metric(label='Contagem de Valores', value=f'{contagem}', border=True)
+    inf_col1.metric(label='Contagem de Valores',
+                    value=f'{contagem}', border=True)
     inf_col2.metric(label='Moda', value=f'{moda}', border=True)
     inf_col3.metric(label='Mediana', value=f'{mediana:.2f}', border=True)
-    inf_col4.metric(label='Desvio Padrão', value=f'{desvio_padrao:.2f}', border=True)
+    inf_col4.metric(label='Desvio Padrão',
+                    value=f'{desvio_padrao:.2f}', border=True)
 
     # Expansor contendo DataFrame com estatísticas descritivas
     expander = st.expander(
         'Clique aqui para saber mais informações estatísticas descritivas', icon=':material/info:')
     expander.dataframe(tabela.describe())
-
-
 
 
 # ------ Visualização de múltiplas colunas numéricas ------
@@ -252,7 +254,7 @@ if upload is not None and (len(colunas_numericas) > 1 or len(colunas_categoricas
 
     # Permite ao usuário escolher se quer comparar colunas numéricas ou categóricas
     tipo_comparacao = st.selectbox("Tipo de comparação:", ["Nenhuma", "Numérica", "Categórica"]
-    )
+                                   )
 
     # ----- Colunas Numéricas ----- #
     # Se existir mais de uma coluna numérica, permite criar gráficos comparativos entre elas
@@ -352,11 +354,7 @@ if upload is not None and (len(colunas_numericas) > 1 or len(colunas_categoricas
                     fig = px.imshow(heatmap_data, text_auto=True, aspect="auto", labels=dict(
                         x=segunda_coluna, y=primeira_coluna, color="Contagem"))
                     st.plotly_chart(fig)
-    
+
     # Se o usuário não selecionar nenhuma opção, emite um alerta.
     elif tipo_comparacao == 'Nenhuma':
         st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')
-        
-    else:
-        # Caso não haja colunas suficientes para o tipo de comparação escolhido
-        st.info('Não há colunas suficientes para comparação do tipo selecionado.')
