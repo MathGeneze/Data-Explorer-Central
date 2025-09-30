@@ -89,9 +89,8 @@
 
 ### 1️⃣ Tela Inicial
 https://github.com/user-attachments/assets/3bd841f7-08b2-4092-9e4e-cee6f3b9b820
-ⓘ Tela inicial do site com fundo animado. Permite o usuário inserir o arquivo csv para análise.
 
-
+ⓘ Tela inicial do site com opções de temas Dark, Light e Gradient. Permite o usuário inserir o arquivo csv para análise.
 
 ### 2️⃣ Upload de Arquivo CSV
 <figure>
