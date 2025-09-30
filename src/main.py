@@ -193,8 +193,8 @@ if upload is not None:
                 st.plotly_chart(fig, use_container_width=True)
 
         # Se o usuário não selecionar nenhuma opção, emite um alerta.
-    elif escolha == 'Nenhuma':
-        st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')
+        elif escolha == 'Nenhuma':
+            st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')
 
 # Verifica se não há colunas categóricas nem numéricas e exibe uma mensagem informativa
 if upload is not None and len(colunas_categoricas) == 0 and len(colunas_numericas) == 0:
