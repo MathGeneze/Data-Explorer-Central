@@ -153,7 +153,7 @@ if upload is not None:
                     ), horizontal=True, color=escolha_cor)
 
         # --- Gráficos e métricas para coluna numérica ---
-        if escolha == 'Numérica' and len(colunas_numericas) > 0:
+        elif escolha == 'Numérica' and len(colunas_numericas) > 0:
             escolha_coluna_num = st.selectbox(
                 'Selecione uma coluna numérica:', colunas_numericas)
 
@@ -193,7 +193,7 @@ if upload is not None:
                 st.plotly_chart(fig, use_container_width=True)
 
         # Se o usuário não selecionar nenhuma opção, emite um alerta.
-        if escolha == 'Nenhuma':
+        else:
             st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')
 
 # Verifica se não há colunas categóricas nem numéricas e exibe uma mensagem informativa
