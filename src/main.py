@@ -171,56 +171,76 @@ if upload is not None:
                 st.bar_chart(tabela[escolha_coluna_num].value_counts(
                 ), horizontal=False, color=escolha_cor)
             else:
-                st.bar_chart(tabela[escolha_coluna_num].value_counts(
-                ), horizontal=True, color=escolha_cor)
+                # Exibe gráfico de barras usando plotly para coluna numérica única
+                contagem = tabela[escolha_coluna_num].value_counts(
+                ).reset_index()
+                contagem.columns = [escolha_coluna_num, 'Contagem']
+                if opcoes == 'Vertical':
+                    fig = px.bar(
+                        contagem,
+                        x=escolha_coluna_num,
+                        y='Contagem',
+                        color_discrete_sequence=[escolha_cor]
+                    )
+                else:
+                    fig = px.bar(
+                        contagem,
+                        x='Contagem',
+                        y=escolha_coluna_num,
+                        orientation='h',
+                        color_discrete_sequence=[escolha_cor]
+                    )
+                st.plotly_chart(fig, use_container_width=True)
 
-        # ------ Métricas estatísticas ------ #
-        st.divider()
-        st.subheader(
-            '🌐 Métricas Estatísticas ')
-        st.markdown(
-            f'*Observe abaixo as métricas disponíveis de cada **coluna numérica.***')
-
-        escolha_metrica = st.selectbox(
-            'Selecione uma coluna:', colunas_numericas)
-
-        # -- Métricas da coluna Superior
-        maximo = tabela[escolha_metrica].max()
-        minimo = tabela[escolha_metrica].min()
-        soma = tabela[escolha_metrica].sum()
-        media = tabela[escolha_metrica].mean()
-
-        # -- Métricas da coluna Inferior
-        contagem = tabela[escolha_metrica].count()
-        moda = tabela[escolha_metrica].mode().loc[0]
-        mediana = tabela[escolha_metrica].median()
-        desvio_padrao = tabela[escolha_metrica].std()
-
-        # Exibe as métricas em colunas para melhor visualização
-        # -- Coluna supeior
-        sup_col1, sup_col2, sup_col3, sup_col4 = st.columns(4)
-        sup_col1.metric(label='Valor Máximo', value=f'{maximo}', border=True)
-        sup_col2.metric(label='Valor Mínimo', value=f'{minimo}', border=True)
-        sup_col3.metric(label='Soma', value=f'{soma}', border=True)
-        sup_col4.metric(label='Média', value=f'{media:.2f}', border=True)
-
-        # -- Coluna Inferior
-        inf_col1, inf_col2, inf_col3, inf_col4 = st.columns(4)
-        inf_col1.metric(label='Contagem de Valores',
-                        value=f'{contagem}', border=True)
-        inf_col2.metric(label='Moda', value=f'{moda}', border=True)
-        inf_col3.metric(label='Mediana', value=f'{mediana:.2f}', border=True)
-        inf_col4.metric(label='Desvio Padrão',
-                        value=f'{desvio_padrao:.2f}', border=True)
-
-        # Expansor contendo DataFrame com estatísticas descritivas
-        expander = st.expander(
-            'Clique aqui para saber mais informações estatísticas descritivas', icon=':material/info:')
-        expander.dataframe(tabela.describe())
-
+        # Se o usuário não selecionar nenhuma opção, emite um alerta.
+    if escolha == 'Nenhuma':
+        st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')  
+                  
     else:
-        st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.',
-                icon=':material/warning:')
+        st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.',icon=':material/warning:')  
+    
+    
+# ------ Métricas estatísticas ------ #        
+if upload is not None:  
+    st.divider()
+    st.subheader('🌐 Métricas Estatísticas ')
+    st.markdown(f'*Observe abaixo as métricas disponíveis de cada **coluna numérica.***')
+
+    escolha_metrica = st.selectbox('Selecione uma coluna:', colunas_numericas)
+
+    # -- Métricas da coluna Superior
+    maximo = tabela[escolha_metrica].max()
+    minimo = tabela[escolha_metrica].min()
+    soma = tabela[escolha_metrica].sum()
+    media = tabela[escolha_metrica].mean()
+
+    # -- Métricas da coluna Inferior
+    contagem = tabela[escolha_metrica].count()
+    moda = tabela[escolha_metrica].mode().loc[0]
+    mediana = tabela[escolha_metrica].median()
+    desvio_padrao = tabela[escolha_metrica].std()
+
+    # Exibe as métricas em colunas para melhor visualização
+    # -- Coluna supeior
+    sup_col1, sup_col2, sup_col3, sup_col4 = st.columns(4)
+    sup_col1.metric(label='Valor Máximo', value=f'{maximo}', border=True)
+    sup_col2.metric(label='Valor Mínimo', value=f'{minimo}', border=True)
+    sup_col3.metric(label='Soma', value=f'{soma}', border=True)
+    sup_col4.metric(label='Média', value=f'{media:.2f}', border=True)
+
+    # -- Coluna Inferior
+    inf_col1, inf_col2, inf_col3, inf_col4 = st.columns(4)
+    inf_col1.metric(label='Contagem de Valores', value=f'{contagem}', border=True)
+    inf_col2.metric(label='Moda', value=f'{moda}', border=True)
+    inf_col3.metric(label='Mediana', value=f'{mediana:.2f}', border=True)
+    inf_col4.metric(label='Desvio Padrão', value=f'{desvio_padrao:.2f}', border=True)
+
+    # Expansor contendo DataFrame com estatísticas descritivas
+    expander = st.expander(
+        'Clique aqui para saber mais informações estatísticas descritivas', icon=':material/info:')
+    expander.dataframe(tabela.describe())
+
+
 
 
 # ------ Visualização de múltiplas colunas numéricas ------
@@ -231,18 +251,18 @@ if upload is not None and (len(colunas_numericas) > 1 or len(colunas_categoricas
         '*Selecione **duas colunas** e o **tipo de gráfico** para fazer análises comparativas.*')
 
     # Permite ao usuário escolher se quer comparar colunas numéricas ou categóricas
-    tipo_comparacao = st.selectbox(
-        "Tipo de comparação:", ["Numérica", "Categórica"]
+    tipo_comparacao = st.selectbox("Tipo de comparação:", ["Nenhuma", "Numérica", "Categórica"]
     )
 
     # ----- Colunas Numéricas ----- #
     # Se existir mais de uma coluna numérica, permite criar gráficos comparativos entre elas
     if tipo_comparacao == "Numérica" and len(colunas_numericas) > 1:
         col1, col2 = st.columns(2)
-        
+
         # Usuário escolhe a primeira coluna numérica
-        primeira_coluna = col1.selectbox(label='Escolha a primeira coluna:', options=colunas_numericas, key="num1")
-        
+        primeira_coluna = col1.selectbox(
+            label='Escolha a primeira coluna:', options=colunas_numericas, key="num1")
+
         # Remove a primeira coluna da lista para evitar repetição
         outras_colunas = colunas_numericas.drop(primeira_coluna)
 
@@ -250,13 +270,15 @@ if upload is not None and (len(colunas_numericas) > 1 or len(colunas_categoricas
             st.info('Não há outra coluna numérica para comparar.')
         else:
             # Usuário escolhe a segunda coluna numérica
-            segunda_coluna = col2.selectbox(label='Escolha a segunda coluna:', options=outras_colunas, key="num2")
+            segunda_coluna = col2.selectbox(
+                label='Escolha a segunda coluna:', options=outras_colunas, key="num2")
 
             if primeira_coluna == segunda_coluna:
                 st.warning('Selecione duas colunas diferentes!')
             else:
                 # Usuário escolhe o tipo de gráfico desejado
-                escolha_grafico = st.selectbox(label='Selecione um tipo de gráfico:', options=['Barra', 'Linha', 'Área', 'Dispersão', 'Caixa'])
+                escolha_grafico = st.selectbox(label='Selecione um tipo de gráfico:', options=[
+                                               'Barra', 'Linha', 'Área', 'Dispersão', 'Caixa'])
 
                 # Usuário escolhe a orientação do gráfico
                 opcoes2 = ['Vertical', 'Horizontal']
@@ -267,7 +289,8 @@ if upload is not None and (len(colunas_numericas) > 1 or len(colunas_categoricas
                 def gerar_grafico_num(df, coluna_x, coluna_y, tipo, angulo):
                     if tipo == 'Barra':
                         orientation = 'v' if angulo == 'Vertical' else 'h'
-                        fig = px.bar(df, x=coluna_x, y=coluna_y,orientation=orientation)
+                        fig = px.bar(df, x=coluna_x, y=coluna_y,
+                                     orientation=orientation)
                     elif tipo == 'Linha':
                         fig = px.line(df, x=coluna_x, y=coluna_y)
                     elif tipo == 'Área':
@@ -291,38 +314,49 @@ if upload is not None and (len(colunas_numericas) > 1 or len(colunas_categoricas
     # Se existir mais de uma coluna categórica, permite comparar categorias entre duas colunas
     elif tipo_comparacao == "Categórica" and len(colunas_categoricas) > 1:
         col1, col2 = st.columns(2)
-        
+
         # Usuário escolhe a primeira coluna categórica
-        primeira_coluna = col1.selectbox(label='Escolha a primeira coluna categórica:', options=colunas_categoricas, key="cat1")
-        
+        primeira_coluna = col1.selectbox(
+            label='Escolha a primeira coluna categórica:', options=colunas_categoricas, key="cat1")
+
         # Remove a primeira coluna da lista para evitar repetição
         outras_colunas = colunas_categoricas.drop(primeira_coluna)
-        
+
         if len(outras_colunas) == 0:
             st.info('Não há outra coluna categórica para comparar.')
         else:
             # Usuário escolhe a segunda coluna categórica
-            segunda_coluna = col2.selectbox(label='Escolha a segunda coluna categórica:', options=outras_colunas, key="cat2")
-            
+            segunda_coluna = col2.selectbox(
+                label='Escolha a segunda coluna categórica:', options=outras_colunas, key="cat2")
+
             if primeira_coluna == segunda_coluna:
                 st.warning('Selecione duas colunas diferentes!')
-                
+
             else:
                 # Usuário escolhe o tipo de gráfico para comparação categórica
-                escolha_grafico = st.selectbox(label='Selecione um tipo de gráfico:', options=['Barra Agrupada', 'Heatmap'])
-    
+                escolha_grafico = st.selectbox(label='Selecione um tipo de gráfico:', options=[
+                                               'Barra Agrupada', 'Mapa de Calor'])
+
+                # Conta as combinações entre as duas colunas e plota gráfico de barras agrupadas
                 if escolha_grafico == 'Barra Agrupada':
-                    # Conta as combinações entre as duas colunas e plota gráfico de barras agrupadas
-                    contagem = tabela.groupby([primeira_coluna, segunda_coluna]).size().reset_index(name='Contagem')
-                    fig = px.bar(contagem, x=primeira_coluna, y='Contagem',color=segunda_coluna, barmode='group')
+                    contagem = tabela.groupby(
+                        [primeira_coluna, segunda_coluna]).size().reset_index(name='Contagem')
+                    fig = px.bar(contagem, x=primeira_coluna, y='Contagem',
+                                 color=segunda_coluna, barmode='group')
                     st.plotly_chart(fig)
-                    
-                # Cria uma tabela cruzada (crosstab) e plota um heatmap    
-                elif escolha_grafico == 'Heatmap':
-                    heatmap_data = pd.crosstab(tabela[primeira_coluna], tabela[segunda_coluna])
-                    fig = px.imshow(heatmap_data, text_auto=True, aspect="auto",labels=dict(x=segunda_coluna, y=primeira_coluna, color="Contagem"))
+
+                # Cria uma tabela cruzada (crosstab) e plota um Mapa de Calor
+                elif escolha_grafico == 'Mapa de Calor':
+                    heatmap_data = pd.crosstab(
+                        tabela[primeira_coluna], tabela[segunda_coluna])
+                    fig = px.imshow(heatmap_data, text_auto=True, aspect="auto", labels=dict(
+                        x=segunda_coluna, y=primeira_coluna, color="Contagem"))
                     st.plotly_chart(fig)
-                    
+    
+    # Se o usuário não selecionar nenhuma opção, emite um alerta.
+    elif tipo_comparacao == 'Nenhuma':
+        st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')
+        
     else:
         # Caso não haja colunas suficientes para o tipo de comparação escolhido
         st.info('Não há colunas suficientes para comparação do tipo selecionado.')
