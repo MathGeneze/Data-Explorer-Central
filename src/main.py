@@ -193,11 +193,11 @@ if upload is not None:
                 st.plotly_chart(fig, use_container_width=True)
 
         # Se o usuário não selecionar nenhuma opção, emite um alerta.
-    elif escolha == 'Nenhuma':
+    else:
         st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')  
                   
-    else:
-        st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.',icon=':material/warning:')  
+else:
+    st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.',icon=':material/warning:')  
     
     
 # ------ Métricas estatísticas ------ #        
