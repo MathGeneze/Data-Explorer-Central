@@ -74,8 +74,8 @@
 > * ▷ **assets**: Pasta com as imagens do projeto.
 > * ▷ **data**: Pasta com arquivos csv de teste.
 > * ▷ **src**: Pasta com o código principal.
+> * ▷ **styles**: Pasta com os temas de estilização da página.
 >   * `app.py` - Código principal da aplicação Streamlit.
-
 > * `requirements.txt` - Dependências do projeto.
 > * `README.md` - Documentação.
 
@@ -88,10 +88,10 @@
 *Abaixo contém as imagens diretamente do projeto em funcionamento, mostrando as suas funcionalidades.*
 
 ### 1️⃣ Tela Inicial
-<figure>
-  <img src="assets/tela_inicial.png" width="600" alt="Tela Inicial">
-  <figcaption>ⓘ Tela inicial do site com fundo animado. Permite o usuário inserir o arquivo csv para análise.</figcaption>
-</figure>
+https://github.com/user-attachments/assets/3bd841f7-08b2-4092-9e4e-cee6f3b9b820
+ⓘ Tela inicial do site com fundo animado. Permite o usuário inserir o arquivo csv para análise.
+
+
 
 ### 2️⃣ Upload de Arquivo CSV
 <figure>
