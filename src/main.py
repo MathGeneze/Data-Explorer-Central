@@ -59,9 +59,32 @@ if upload is not None:
         f'*Seu arquivo possui: **{len(tabela.columns)} colunas** e **{len(tabela.index)} linhas**.*')
 
     # Slider para o usuário escolher quantas linhas visualizar
-    num_linhas = st.slider('Quantas linhas deseja visualizar?',
-                           min_value=5, max_value=min(50, len(tabela)), value=5, step=1)
+    num_linhas = st.slider('Quantas linhas deseja visualizar?',min_value=5, max_value=min(50, len(tabela)), value=5, step=1)
     st.dataframe(tabela.head(num_linhas))
+    
+    # --- Expansor contendo informações básicas sobre a tabela (tipo de dado, valores nulos e não nulos)
+    with st.expander('Clique aqui para saber mais detalhes da tabela:', icon=':material/dataset:'):
+        st.text('Informações descritivas sobre a tabela:')
+        
+        # Identifica colunas categóricas (texto) e numéricas
+        colunas_categoricas = tabela.select_dtypes(exclude='number').columns
+        colunas_numericas = tabela.select_dtypes(include='number').columns
+        # Quantidade de colunas categóricas e numéricas
+        qtd_colunas_categ = len(colunas_categoricas)
+        qtd_colunas_num = len(colunas_numericas)
+    
+        st.write(f'• Colunas numéricas: {qtd_colunas_num}')
+        st.write(f'• Colunas categóricas: {qtd_colunas_categ}')
+        
+        st.dataframe(
+            pd.DataFrame({
+                "Tipos de Dados": tabela.dtypes,
+                "Valores Não Nulos": tabela.notnull().sum(),
+                "Valores Nulos": tabela.isnull().sum()
+            })
+        )
+        
+    
     st.divider()
 
 
@@ -70,9 +93,8 @@ if upload is not None:
     st.subheader('📈 Visualização de Colunas Únicas')
     st.markdown('*Escolha entre colunas **Numéricas** e **Categóricas (texto)**. Visualize em formato de **gráfico de barras** e **métricas**.*')
 
-    # Identifica colunas categóricas (texto) e numéricas
-    colunas_categoricas = tabela.select_dtypes(exclude='number').columns
-    colunas_numericas = tabela.select_dtypes(include='number').columns
+    
+    
 
     # Permite ao usuário escolher o tipo de coluna para análise
     escolha = st.selectbox(label='Qual tipo de coluna você gostaria de visualizar?', options=[
@@ -162,9 +184,14 @@ if upload is not None:
         inf_col3.metric(label='Mediana', value=f'{mediana:.2f}', border=True)
         inf_col4.metric(label='Desvio Padrão',value=f'{desvio_padrao:.2f}', border=True)
 
+        # Expansor contendo DataFrame com estatísticas descritivas 
+        expander = st.expander('Clique aqui para saber mais informações estatísticas descritivas', icon=':material/info:')
+        expander.dataframe(tabela.describe())
+        
+        
+        
     else:
-        st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.',
-                icon=':material/warning:')
+        st.info('Nenhuma coluna categórica ou numérica disponível para gráfico.', icon=':material/warning:')
 
 
 
