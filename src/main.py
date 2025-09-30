@@ -115,52 +115,32 @@ if upload is not None:
 
     st.divider()
 
-    # ------ Visualização de colunas únicas ------ #
+
+
+# ------ Visualização de colunas únicas ------ #
+if upload is not None:
     st.subheader('📈 Visualização de Colunas Únicas')
     st.markdown('*Escolha entre colunas **Numéricas** e **Categóricas (texto)**. Visualize em formato de **gráfico de barras** e **métricas**.*')
 
     # Permite ao usuário escolher o tipo de coluna para análise
     escolha = st.selectbox(label='Qual tipo de coluna você gostaria de visualizar?', options=[
                            'Nenhuma', 'Numérica', 'Categórica'])
+    
 
-    if escolha is not None:
+    # --- Gráfico para coluna categórica ---
+    if escolha == 'Categórica':
+        if len(colunas_categoricas) == 0:
+            st.warning('Este arquivo não contém dados categóricos')
 
-        # --- Gráfico para coluna categórica ---
-        if escolha == 'Categórica':
-            if len(colunas_categoricas) == 0:
-                st.warning('Este arquivo não contém dados categóricos')
-
-            else:
-                coluna_unica = st.selectbox(
-                    'Selecione uma coluna categórica:', colunas_categoricas)
-
-                # --- Usuário seleciona a posição do gráfico
-                posicao = ['Vertical', 'Horizontal']
-                c1, c2 = st.columns(2)
-                opcoes = c1.pills(
-                    'Escolha a posição do gráfico:', options=posicao)
-
-                # --- Usuário pode selecionar a cor do gráfio
-                escolha_cor = c2.color_picker(
-                    "Escolha a cor do gráfico:", '#1585C1')
-
-                if opcoes == 'Vertical':
-                    # Exibe gráfico
-                    st.bar_chart(tabela[coluna_unica].value_counts(
-                    ), horizontal=False, color=escolha_cor)
-                else:
-                    st.bar_chart(tabela[coluna_unica].value_counts(
-                    ), horizontal=True, color=escolha_cor)
-
-        # --- Gráficos e métricas para coluna numérica ---
-        elif escolha == 'Numérica' and len(colunas_numericas) > 0:
-            escolha_coluna_num = st.selectbox(
-                'Selecione uma coluna numérica:', colunas_numericas)
+        else:
+            coluna_unica = st.selectbox(
+                'Selecione uma coluna categórica:', colunas_categoricas)
 
             # --- Usuário seleciona a posição do gráfico
             posicao = ['Vertical', 'Horizontal']
             c1, c2 = st.columns(2)
-            opcoes = c1.pills('Escolha a posição do gráfico:', options=posicao)
+            opcoes = c1.pills(
+                'Escolha a posição do gráfico:', options=posicao)
 
             # --- Usuário pode selecionar a cor do gráfio
             escolha_cor = c2.color_picker(
@@ -168,33 +148,55 @@ if upload is not None:
 
             if opcoes == 'Vertical':
                 # Exibe gráfico
-                st.bar_chart(tabela[escolha_coluna_num].value_counts(
+                st.bar_chart(tabela[coluna_unica].value_counts(
                 ), horizontal=False, color=escolha_cor)
             else:
-                # Exibe gráfico de barras usando plotly para coluna numérica única
-                contagem = tabela[escolha_coluna_num].value_counts(
-                ).reset_index()
-                contagem.columns = [escolha_coluna_num, 'Contagem']
-                if opcoes == 'Vertical':
-                    fig = px.bar(
-                        contagem,
-                        x=escolha_coluna_num,
-                        y='Contagem',
-                        color_discrete_sequence=[escolha_cor]
-                    )
-                else:
-                    fig = px.bar(
-                        contagem,
-                        x='Contagem',
-                        y=escolha_coluna_num,
-                        orientation='h',
-                        color_discrete_sequence=[escolha_cor]
-                    )
-                st.plotly_chart(fig, use_container_width=True)
+                st.bar_chart(tabela[coluna_unica].value_counts(
+                ), horizontal=True, color=escolha_cor)
 
-        # Se o usuário não selecionar nenhuma opção, emite um alerta.
+    # --- Gráficos e métricas para coluna numérica ---
+    elif escolha == 'Numérica' and len(colunas_numericas) > 0:
+        escolha_coluna_num = st.selectbox(
+            'Selecione uma coluna numérica:', colunas_numericas)
+
+        # --- Usuário seleciona a posição do gráfico
+        posicao = ['Vertical', 'Horizontal']
+        c1, c2 = st.columns(2)
+        opcoes = c1.pills('Escolha a posição do gráfico:', options=posicao)
+
+        # --- Usuário pode selecionar a cor do gráfio
+        escolha_cor = c2.color_picker(
+            "Escolha a cor do gráfico:", '#1585C1')
+
+        if opcoes == 'Vertical':
+            # Exibe gráfico
+            st.bar_chart(tabela[escolha_coluna_num].value_counts(
+            ), horizontal=False, color=escolha_cor)
         else:
-            st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')
+            # Exibe gráfico de barras usando plotly para coluna numérica única
+            contagem = tabela[escolha_coluna_num].value_counts(
+            ).reset_index()
+            contagem.columns = [escolha_coluna_num, 'Contagem']
+            if opcoes == 'Vertical':
+                fig = px.bar(
+                    contagem,
+                    x=escolha_coluna_num,
+                    y='Contagem',
+                    color_discrete_sequence=[escolha_cor]
+                )
+            else:
+                fig = px.bar(
+                    contagem,
+                    x='Contagem',
+                    y=escolha_coluna_num,
+                    orientation='h',
+                    color_discrete_sequence=[escolha_cor]
+                )
+            st.plotly_chart(fig, use_container_width=True)
+
+    # Se o usuário não selecionar nenhuma opção, emite um alerta.
+    else:
+        st.warning('Nenhuma coluna selecionada.', icon=':material/warning:')
 
 # Verifica se não há colunas categóricas nem numéricas e exibe uma mensagem informativa
 if upload is not None and len(colunas_categoricas) == 0 and len(colunas_numericas) == 0:
