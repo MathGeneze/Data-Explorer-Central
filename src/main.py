@@ -5,7 +5,7 @@ import plotly.express as px
 # ------- Layout da Página ---------#
 # Opções de troca de temas da página.
 # Usuário pode alternar entre Dark/ Light ou Gradient.
-st.set_page_config(page_title="Tema Dinâmico", layout="wide")
+st.set_page_config(page_title="Data Explorer Central", layout="wide")
 
 # Se nenhum tema for selecionado, ele inicia com o Grandient
 if "tema" not in st.session_state:
